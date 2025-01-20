@@ -22,8 +22,15 @@ const onSearchFormSubmit = event => {
   const searchedQuery = event.currentTarget.elements.user_query.value.trim();
 
   if (searchedQuery === '') {
-    alert('Поле має бути заповнено!');
+    iziToast.show({
+      color: 'red',
+      titleColor: 'red',
+      title: 'Fields must be filled!',
+      position: 'topRight',
+    });
+    galleryEl.innerHTML = '';
 
+    searchFormEl.reset();
     return;
   }
 
@@ -56,7 +63,13 @@ const onSearchFormSubmit = event => {
     })
 
     .catch(err => {
-      console.log(err);
+      iziToast.show({
+        color: 'red',
+        titleColor: 'red',
+        title: `Нажаль сталася помилка!
+        ${err}`,
+        position: 'topRight',
+      });
     });
 };
 
